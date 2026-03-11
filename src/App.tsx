@@ -6,6 +6,7 @@ import { QuizInfo } from './components/QuizInfo';
 import { QuestionCard } from './components/QuestionCard';
 import { ActionBar } from './components/ActionBar';
 import { PreviewPage } from './components/PreviewPage';
+import { WelcomePopup } from './components/WelcomePopup';
 
 function App() {
   const [quiz, setQuiz] = useState<Quiz>({
@@ -15,8 +16,23 @@ function App() {
   });
   
   const [isPreview, setIsPreview] = useState(false);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
 
-  
+  useEffect(() => {
+    const savedName = localStorage.getItem('userName');
+    if (savedName) {
+      setUserName(savedName);
+    } else {
+      setShowPopup(true);
+    }
+  }, []);
+
+  const handleNameSubmit = (name: string) => {
+    localStorage.setItem('userName', name);
+    setUserName(name);
+    setShowPopup(false);
+  };
 
   const addQuestion = () => {
     const newQuestion: Question = {
@@ -50,7 +66,9 @@ function App() {
 
   return (
     <div className="container">
-      <QuizHeader />
+      {showPopup && <WelcomePopup onSubmit={handleNameSubmit} />}
+      
+      <QuizHeader userName={userName || undefined} />
       
       <QuizInfo quiz={quiz} onChange={setQuiz} />
 

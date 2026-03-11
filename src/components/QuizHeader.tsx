@@ -1,12 +1,17 @@
-import React from "react";
+interface QuizHeaderProps {
+  userName?: string;
+}
 
-export function QuizHeader() {
+export function QuizHeader({ userName }: QuizHeaderProps) {
   return (
     <div className="header">
       <h1>Quiz Editor</h1>
       <p>Create and manage your quizzes</p>
-      <h1></h1>
+      {userName && (
+        <div className="user-greeting">
+          Welcome, {userName}!
+        </div>
+      )}
     </div>
   );
 }
-
