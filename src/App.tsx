@@ -6,7 +6,6 @@ import { QuizInfo } from './components/QuizInfo';
 import { QuestionCard } from './components/QuestionCard';
 import { ActionBar } from './components/ActionBar';
 import { PreviewPage } from './components/PreviewPage';
-import { PopupName } from './components/PopupName';
 
 function App() {
   const [quiz, setQuiz] = useState<Quiz>({
