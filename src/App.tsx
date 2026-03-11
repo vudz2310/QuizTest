@@ -14,16 +14,9 @@ function App() {
     questions: []
   });
   
-  const [showPopup, setShowPopup] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
 
-  useEffect(() => {
-    if (!localStorage.getItem("nameUser")) {
-      setShowPopup(true);
-    } else {
-      setShowPopup(false);
-    }
-  }, []);
+  
 
   const addQuestion = () => {
     const newQuestion: Question = {
