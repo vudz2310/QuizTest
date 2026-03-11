@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import type { Quiz, Question } from './types';
 import { QuizHeader } from './components/QuizHeader';
@@ -6,6 +6,7 @@ import { QuizInfo } from './components/QuizInfo';
 import { QuestionCard } from './components/QuestionCard';
 import { ActionBar } from './components/ActionBar';
 import { PreviewPage } from './components/PreviewPage';
+import { PopupName } from './components/PopupName';
 
 function App() {
   const [quiz, setQuiz] = useState<Quiz>({
@@ -14,7 +15,16 @@ function App() {
     questions: []
   });
   
+  const [showPopup, setShowPopup] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem("nameUser")) {
+      setShowPopup(true);
+    } else {
+      setShowPopup(false);
+    }
+  }, []);
 
   const addQuestion = () => {
     const newQuestion: Question = {
